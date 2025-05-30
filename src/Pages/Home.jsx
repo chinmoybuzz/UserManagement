@@ -1,7 +1,19 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect } from "react";
 import { Link } from "react-router";
 
 const Home = () => {
+  useEffect(() => {
+    axios
+      .get("https://usermanagementapi-1frb.onrender.com/list")
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching data:", err);
+      });
+  }, []); //
+
   return (
     <div>
       <h1>Home page</h1>
