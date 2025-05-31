@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import axiosInstance from "../api/api";
 const Signup = ({ role }) => {
   const [userData, setUserData] = useState({});
   const [dropdownOptions, setDropdownOptions] = useState([]);
@@ -32,7 +32,7 @@ const Signup = ({ role }) => {
 
       setLoading(true);
       try {
-        const response = await axios.get(`http://localhost:3000/api/v1/users/list?role=${apiRoleParam}`);
+        const response = await axiosInstance.get(`/users/list?role=${apiRoleParam}`);
 
         setDropdownOptions(response.data.result || []);
       } catch (error) {
@@ -54,7 +54,7 @@ const Signup = ({ role }) => {
     };
 
     try {
-      const response = await axios.post("http://localhost:3000/api/v1/auth/signup", payload);
+      const response = await axiosInstance.post("/auth/signup", payload);
       console.log("Signup success:", response.result);
 
       alert("Signup successful!");

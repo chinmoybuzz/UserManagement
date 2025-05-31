@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
-
+import axiosInstance from "../api/api";
 const Login = () => {
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
@@ -24,7 +24,7 @@ const Login = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post("http://localhost:3000/api/v1/auth/login", loginData);
+      const response = await axiosInstance.post("/auth/login", loginData);
       console.log("Login success:", response.data);
 
       localStorage.setItem("token", response.data.accessToken);
